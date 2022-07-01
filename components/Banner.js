@@ -47,7 +47,7 @@ export default function Banner({ }) {
                 <div className=''>
                     <div className='mx-auto flex sm:flex-row flex-col items-center'>
                         <div>
-                            <svg t="1653031262451" className="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2674" width="100" height="100"><path d="M896 832L128 938.666667V106.666667h768z" p-id="2675" fill="#d81e06" data-spm-anchor-id="a313x.7781069.0.i0" class="selected"></path><path d="M512 170.666667L213.333333 682.666667l85.333334 85.333333 170.666666-128h-110.933333L512 384l153.6 256H554.666667l170.666666 128 85.333334-85.333333z" p-id="2676" fill="#ffffff" data-spm-anchor-id="a313x.7781069.0.i1"></path></svg>
+                            <svg t="1653031262451" className="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2674" width="100" height="100"><path d="M896 832L128 938.666667V106.666667h768z" p-id="2675" fill="#d81e06" data-spm-anchor-id="a313x.7781069.0.i0" className="selected"></path><path d="M512 170.666667L213.333333 682.666667l85.333334 85.333333 170.666666-128h-110.933333L512 384l153.6 256H554.666667l170.666666 128 85.333334-85.333333z" p-id="2676" fill="#ffffff" data-spm-anchor-id="a313x.7781069.0.i1"></path></svg>
                         </div>
                         <div>
                             <div className='sm:text-4xl text-3xl text-white text-center'>APEX LEGENDS追踪器</div>
