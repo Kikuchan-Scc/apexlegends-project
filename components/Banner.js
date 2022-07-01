@@ -47,7 +47,7 @@ export default function Banner({ }) {
                 <div className=''>
                     <div className='mx-auto flex sm:flex-row flex-col items-center'>
                         <div>
-                            <svg t="1653031262451" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2674" width="100" height="100"><path d="M896 832L128 938.666667V106.666667h768z" p-id="2675" fill="#d81e06" data-spm-anchor-id="a313x.7781069.0.i0" class="selected"></path><path d="M512 170.666667L213.333333 682.666667l85.333334 85.333333 170.666666-128h-110.933333L512 384l153.6 256H554.666667l170.666666 128 85.333334-85.333333z" p-id="2676" fill="#ffffff" data-spm-anchor-id="a313x.7781069.0.i1"></path></svg>
+                            <svg t="1653031262451" className="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2674" width="100" height="100"><path d="M896 832L128 938.666667V106.666667h768z" p-id="2675" fill="#d81e06" data-spm-anchor-id="a313x.7781069.0.i0" class="selected"></path><path d="M512 170.666667L213.333333 682.666667l85.333334 85.333333 170.666666-128h-110.933333L512 384l153.6 256H554.666667l170.666666 128 85.333334-85.333333z" p-id="2676" fill="#ffffff" data-spm-anchor-id="a313x.7781069.0.i1"></path></svg>
                         </div>
                         <div>
                             <div className='sm:text-4xl text-3xl text-white text-center'>APEX LEGENDS追踪器</div>
@@ -63,7 +63,7 @@ export default function Banner({ }) {
                                 {
                                     platformIcon.map((item, index) => (
                                         <li id={item.name} onClick={(e) => listStatus(item, index)} className={isShow === index ? 'px-[50px] py-5 fill-white rounded-md' : 'px-[50px] py-5 fill-white opacity-20 rounded-md'}>
-                                            <svg t="1652518841850" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="10950" width="25" height="25"><path d={item.path} p-id="10951"></path></svg>
+                                            <svg t="1652518841850" className="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="10950" width="25" height="25"><path d={item.path} p-id="10951"></path></svg>
                                         </li>
                                     ))
                                 }
@@ -72,7 +72,7 @@ export default function Banner({ }) {
                                 <input type="search" onChange={e => setSearchText(e.target.value)} className="outline-none rounded-l-md py-5 pl-5 w-full bg-slate-600 sm:h-[100px] h-[60px]" placeholder="查找Origin账户" />
                                 <Link href={'/profiles/' + searchText}>
                                     <button onClick={handlePlayerSearch} className='flex justify-center items-center rounded-r-md sm:w-[120px] w-[80px] bg-slate-800 text-white'>
-                                        <svg t="1654981222879" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="11183" width="35" height="35"><path d="M469.333333 768c-166.4 0-298.666667-132.266667-298.666666-298.666667s132.266667-298.666667 298.666666-298.666666 298.666667 132.266667 298.666667 298.666666-132.266667 298.666667-298.666667 298.666667z m0-85.333333c119.466667 0 213.333333-93.866667 213.333334-213.333334s-93.866667-213.333333-213.333334-213.333333-213.333333 93.866667-213.333333 213.333333 93.866667 213.333333 213.333333 213.333334z m251.733334 0l119.466666 119.466666-59.733333 59.733334-119.466667-119.466667 59.733334-59.733333z" fill="#ffffff" p-id="11184"></path></svg>
+                                        <svg t="1654981222879" className="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="11183" width="35" height="35"><path d="M469.333333 768c-166.4 0-298.666667-132.266667-298.666666-298.666667s132.266667-298.666667 298.666666-298.666666 298.666667 132.266667 298.666667 298.666666-132.266667 298.666667-298.666667 298.666667z m0-85.333333c119.466667 0 213.333333-93.866667 213.333334-213.333334s-93.866667-213.333333-213.333334-213.333333-213.333333 93.866667-213.333333 213.333333 93.866667 213.333333 213.333333 213.333334z m251.733334 0l119.466666 119.466666-59.733333 59.733334-119.466667-119.466667 59.733334-59.733333z" fill="#ffffff" p-id="11184"></path></svg>
                                     </button>
                                 </Link>
                             </form>
