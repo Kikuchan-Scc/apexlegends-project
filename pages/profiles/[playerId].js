@@ -252,7 +252,7 @@ export default function Profiles() {
                         {/* 卡片 */}
                         <div className=' bg-slate-800 overflow-hidden'>
                             {match.data?.map(e =>
-                                <div className='flex my-4 mx-5 bg-slate-700 rounded-2xl'>
+                                <div key={e.id} className='flex my-4 mx-5 bg-slate-700 rounded-2xl'>
                                     <div className='w-[30%]'>
                                         <div className='w-full'>
                                             <img src={playerData.data?.legends.all[e.legendPlayed].ImgAssets.icon} />

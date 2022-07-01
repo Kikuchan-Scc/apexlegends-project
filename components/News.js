@@ -29,7 +29,7 @@ const News = ({ }) => {
         <div className='mb-2'>官网推送</div>
         <div className=' space-y-4'>
           {getNewsQuery.data?.slice(indexOfFirstPost, indexOfLastPost).map(e =>
-            <div className='w-full h-[174.48px] bg-slate-700'>
+            <div key={e.id} className='w-full h-[174.48px] bg-slate-700'>
               <div className='flex h-full relative'>
                 <div className='w-[40%]'>
                   <Link href={e.link}>

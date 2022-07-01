@@ -62,7 +62,7 @@ export default function Banner({ }) {
                             <ul className="flex items-center justify-center">
                                 {
                                     platformIcon.map((item, index) => (
-                                        <li id={item.name} onClick={(e) => listStatus(item, index)} className={isShow === index ? 'px-[50px] py-5 fill-white rounded-md' : 'px-[50px] py-5 fill-white opacity-20 rounded-md'}>
+                                        <li key={item.id} id={item.name} onClick={(e) => listStatus(item, index)} className={isShow === index ? 'px-[50px] py-5 fill-white rounded-md' : 'px-[50px] py-5 fill-white opacity-20 rounded-md'}>
                                             <svg t="1652518841850" className="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="10950" width="25" height="25"><path d={item.path} p-id="10951"></path></svg>
                                         </li>
                                     ))
