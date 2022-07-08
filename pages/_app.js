@@ -1,13 +1,12 @@
 import React from 'react'
-import { QueryClient, QueryClientProvider } from 'react-query'
 import 'tailwindcss/tailwind.css';
-
-export const queryClient = new QueryClient()
+import Particle from '../components/Particle';
 
 export default function MyApp({ Component, pageProps }) {
   return (
-    <QueryClientProvider client={queryClient}>
+    <div>
+      <Particle />
       <Component {...pageProps} />
-    </QueryClientProvider>
+    </div>
   )
 }

@@ -11,7 +11,7 @@ const Pagination = ({ postsPerPage, totalPost, paginate }) => {
             {/* 翻页按钮 */}
             <div className='flex justify-center items-center py-2 space-x-2'>
                 {pageNumber.map(number => (
-                        <div key={number.id} onClick={() => paginate(number)} className='bg-slate-700 h-[42px] border-[1px] rounded-md border-opacity-30 border-white w-[42px] text-center leading-[42px] text-black cursor-pointer'>
+                        <div key={number.id} onClick={() => paginate(number)} className='bg-[#1d1d50] bg-opacity-50 h-[42px] rounded-md w-[42px] text-center leading-[42px] text-black cursor-pointer'>
                             <a className='text-white'>{number}</a>
                         </div>
                     ))

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { get, post } from '../encapsulation/http'
 import Pagination from './Pagination'
 import { useQuery } from 'react-query'
@@ -16,19 +16,28 @@ const News = ({ }) => {
   const [currentPage, setCrrentPage] = useState(1)
   const [postPerPage, setPostPerPage] = useState(5)
   const getNewsQuery = useQuery('getNews', getNews)
+  const [news,setNews] = useState([])
   const indexOfLastPost = currentPage * postPerPage;
   const indexOfFirstPost = indexOfLastPost - postPerPage;
-  console.log(getNewsQuery.data?.slice(indexOfFirstPost, indexOfLastPost))
+  console.log(news.data?.slice(indexOfFirstPost, indexOfLastPost))
+
+  useEffect(() => {
+    get('/news').then((response) => {
+      setNews(response)
+    }).catch((err) => {
+      console.log(err)
+    })
+  })
 
   // 翻页
   const paginate = (pageNumber) => setCrrentPage(pageNumber)
 
   return (
-    <div className='lg:w-[50%] w-full lg:pl-2 lg:pr-5 px-5 text-white font-light'>
-      <div className='w-full bg-slate-600 rounded-lg px-2 py-2 lg:mt-0 mt-59'>
+    <div className='lg:w-[50%] w-full lg:pl-2 lg:pr-5 px-5 text-white font-light lg:mt-0 '>
+      <div className='w-full bg-slate-600 rounded-lg px-2 py-2 lg:mt-0'>
         <div className='mb-2'>官网推送</div>
         <div className=' space-y-4'>
-          {getNewsQuery.data?.slice(indexOfFirstPost, indexOfLastPost).map(e =>
+          {news.data?.slice(indexOfFirstPost, indexOfLastPost).map(e =>
             <div key={e.id} className='w-full h-[174.48px] bg-slate-700'>
               <div className='flex h-full relative'>
                 <div className='w-[40%]'>
@@ -52,7 +61,7 @@ const News = ({ }) => {
         </div>
         <Pagination
           postsPerPage={postPerPage}
-          totalPost={getNewsQuery.data?.length}
+          totalPost={news.data?.length}
           paginate={paginate}
         />
       </div>

@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { get } from '../encapsulation/http'
+import Image from 'next/image'
 import Link from 'next/link'
+import ClockLoader from 'react-spinners/ClockLoader'
 import Router from 'next/router'
+import Pagination from './Pagination'
+import Particle from '../components/Particle';
 
-
-
-//继承接口属性
 const platformIcon = [
     {
         name: 'origin',
@@ -28,22 +30,66 @@ export default function Banner({ }) {
         console.log(index)
         console.log(item)
     }
-
+    //搜索跳转
     const [searchText, setSearchText] = useState('')
     const handlePlayerSearch = (e) => {
-        //存储到会话存储
-        // window.sessionStorage.setItem('playerId', searchText)
         Router.push({
             pathname: '/profiles/',
             query: {
                 id: searchText
             }
-        },'/profiles/' + searchText)
+        }, '/profiles/' + searchText)
     }
+    //地图轮换
+    const [mapRotate, setMapRotate] = useState([]);
+    useEffect(() => {
+        get('/map-rotate').then((response) => {
+            setMapRotate(response)
+        }).catch((err) => {
+            console.log(err)
+        })
+    }, [])
+    //制造器
+    const [crafting, setCrafting] = useState([])
+    useEffect(() => {
+        get('/crafting').then((response) => (
+            setCrafting(response)
+        )).catch((err) => {
+            console.log(err)
+        })
+    },[])
+    //新闻
+    const [currentPage, setCrrentPage] = useState(1)
+    const [postPerPage, setPostPerPage] = useState(5)
+    const [news, setNews] = useState([])
+    const indexOfLastPost = currentPage * postPerPage;
+    const indexOfFirstPost = indexOfLastPost - postPerPage;
+    console.log(news.data?.slice(indexOfFirstPost, indexOfLastPost))
+
+    useEffect(() => {
+        get('/news').then((response) => {
+            setNews(response)
+        }).catch((err) => {
+            console.log(err)
+        })
+    },[])
+
+    // 翻页
+    const paginate = (pageNumber) => setCrrentPage(pageNumber)
+    //loading状态
+    const [loading, setLoading] = useState(false)
+    useEffect(() => {
+        setLoading(true)
+        if (news.data !== undefined && crafting.data !== undefined && mapRotate.data !== undefined) {
+            setLoading(false)
+        }
+    })
 
     return (
-        <div className=" bg-slate-700 font-light">
-            <div className='flex flex-col bg-cover items-center pt-[20px] w-full' style={{backgroundImage: "url(.././static/images/olps.png"}}>
+        
+        <div className="font-light">
+            <div className='flex flex-col bg-cover items-center pt-[20px] w-full' >
+            {/* style={{ backgroundImage: "url(.././static/images/olps.png" }} */}
                 <div className=''>
                     <div className='mx-auto flex sm:flex-row flex-col items-center'>
                         <div>
@@ -62,16 +108,16 @@ export default function Banner({ }) {
                             <ul className="flex items-center justify-center">
                                 {
                                     platformIcon.map((item, index) => (
-                                        <li key={item.id} id={item.name} onClick={(e) => listStatus(item, index)} className={isShow === index ? 'px-[50px] py-5 fill-white rounded-md' : 'px-[50px] py-5 fill-white opacity-20 rounded-md'}>
+                                        <li key={item.id} id={item.name} onClick={(e) => listStatus(item, index)} className={isShow === index ? 'px-[50px] py-5 fill-[#fff] rounded-md' : 'px-[50px] py-5 fill-[#fff] opacity-50 rounded-md'}>
                                             <svg t="1652518841850" className="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="10950" width="25" height="25"><path d={item.path} p-id="10951"></path></svg>
                                         </li>
                                     ))
                                 }
                             </ul>
                             <form className='w-full flex px-5'>
-                                <input type="search" onChange={e => setSearchText(e.target.value)} className="outline-none rounded-l-md py-5 pl-5 w-full bg-slate-600 sm:h-[100px] h-[60px]" placeholder="查找Origin账户" />
+                                <input type="search" onChange={e => setSearchText(e.target.value)} className="outline-none rounded-l-md py-5 pl-5 w-full bg-[#000012] bg-opacity-80 text-white text-opacity-80 sm:h-[100px] h-[60px]" placeholder="查找Origin账户" />
                                 <Link href={'/profiles/' + searchText}>
-                                    <button onClick={handlePlayerSearch} className='flex justify-center items-center rounded-r-md sm:w-[120px] w-[80px] bg-slate-800 text-white'>
+                                    <button onClick={handlePlayerSearch} className='flex justify-center items-center rounded-r-md sm:w-[120px] w-[80px] bg-[#3a3a8a] bg-opacity-80 text-white'>
                                         <svg t="1654981222879" className="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="11183" width="35" height="35"><path d="M469.333333 768c-166.4 0-298.666667-132.266667-298.666666-298.666667s132.266667-298.666667 298.666666-298.666666 298.666667 132.266667 298.666667 298.666666-132.266667 298.666667-298.666667 298.666667z m0-85.333333c119.466667 0 213.333333-93.866667 213.333334-213.333334s-93.866667-213.333333-213.333334-213.333333-213.333333 93.866667-213.333333 213.333333 93.866667 213.333333 213.333333 213.333334z m251.733334 0l119.466666 119.466666-59.733333 59.733334-119.466667-119.466667 59.733334-59.733333z" fill="#ffffff" p-id="11184"></path></svg>
                                     </button>
                                 </Link>
@@ -83,8 +129,184 @@ export default function Banner({ }) {
                     </div>
                 </div>
             </div>
+            {/* 制造 地图 新闻 */}
+            {loading ?
+                <div className='flex flex-col h-[100vh] justify-center items-center space-y-5'>
+                    <ClockLoader size={100} color={'#1e293b'} />
+                    <div className='text-2xl text-slate-800'>Loading...</div>
+                </div>
+                :
+                <div>
+                    <div className="w-full h-full justify-center">
+                        <div className='text-center'>
+                            <div className='grid sm:grid-cols-2 lg:grid-cols-4 grid-cols-1 gap-4 mx-auto px-5 '>
+                                <div className='rounded-md bg-[#000012] bg-opacity-80'>
+                                    <div>
+                                        {
+                                            mapRotate.data === undefined ? '' : <Image className='object-cover' src={mapRotate?.data.arenas.current.asset} width={3000} height={2000} layout="intrinsic" />
+                                        }
+                                    </div>
+                                    <div className='text-white py-5'>
+                                        <p className='text-center'>当前匹配竞技场地图为：{mapRotate.data?.arenas.current.map}</p>
+                                        <p className='text-center text-white'>距离结束还有：{mapRotate.data?.arenas.current.remainingTimer}</p>
+                                        <div className='text-xl text-white'>下一张竞技场地图为：{mapRotate.data?.arenas.next.map}</div>
+                                    </div>
+                                </div>
+
+                                <div className='rounded-md bg-[#000012] bg-opacity-80'>
+                                    {
+                                        mapRotate.data === undefined ? '' : <Image className='object-cover' src={mapRotate?.data.arenas.next.asset} width={3000} height={2000} layout="intrinsic" />
+                                    }
+                                    <div className='text-white py-5'>
+                                        <p className='text-center'>当前竞技场排位地图为：{mapRotate.data?.arenasRanked.current.map}</p>
+                                        <p className='text-center text-white'>距离结束还有：{mapRotate.data?.arenasRanked.current.remainingTimer}</p>
+                                        <div className='text-xl text-white'>下一张竞技场地图为：{mapRotate.data?.arenasRanked.next.map}</div>
+                                    </div>
+                                </div>
+
+                                <div className='rounded-md bg-[#000012] bg-opacity-80'>
+                                    {
+                                        mapRotate.data === undefined ? '' : <Image className='object-cover' src={mapRotate?.data.battle_royale.current.asset} width={3000} height={2000} layout="intrinsic" />
+                                    }
+
+                                    <div className='text-white py-5'>
+                                        <p className='text-white'>当前匹配大逃杀地图为：{mapRotate.data?.battle_royale.current.map}</p>
+                                        <p className='text-center text-white'>距离结束还有：{mapRotate.data?.battle_royale.current.remainingTimer}</p>
+                                        <div className='text-xl text-white'>下一张大逃杀地图为：{mapRotate.data?.battle_royale.next.map}</div>
+                                    </div>
+                                </div>
+
+                                <div className='rounded-md bg-[#000012] bg-opacity-80'>
+                                    {
+                                        mapRotate.data === undefined ? '' : <Image className='object-cover' src={mapRotate?.data.battle_royale.next.asset} width={3000} height={2000} layout="intrinsic" />
+                                    }
+
+                                    <div className='text-white py-5'>
+                                        <p className='text-white'>当前排位大逃杀地图为：{mapRotate.data?.ranked.current.map}</p>
+                                        <p className='text-center text-white'>距离结束还有：{mapRotate.data?.ranked.current.remainingTimer}</p>
+                                        <div className='text-xl text-white'>下一赛季排位地图为：{mapRotate.data?.ranked.next.map}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div >
+                    <div className="lg:flex mt-5 sm:pb-5 pb-[80px] lg:space-y-0 space-y-5">
+                        {/* crafting */}
+                        <div className='lg:w-[50%] w-full font-light'>
+                            <div className='lg:pl-5 lg:pr-2 px-5'>
+                                <div className='grid grid-cols-3 gap-4 text-white bg-[#000012] bg-opacity-80 border-opacity-80 rounded-lg'>
+                                    <div className='flex flex-col items-center'>
+                                        <div className="mt-2">制造器每日轮换</div>
+                                        <div className='flex py-5 space-x-5'>
+                                            <div>
+                                                {
+                                                    crafting.data === undefined ? '' : <Image src={crafting.data[0].bundleContent[0].itemType.asset} width={80} height={80} layout="intrinsic" />
+                                                }
+                                                <div className='flex justify-center items-center'>
+                                                    <img className='w-[20px] h-[20px]' src=".././static/images/crafting_materials.png" />
+                                                    {crafting.data === undefined ? '' : crafting.data[0].bundleContent[0].cost}
+                                                </div>
+                                            </div>
+                                            <div className=''>
+                                                {
+                                                    crafting.data === undefined ? '' : <Image src={crafting.data[0].bundleContent[1].itemType.asset} width={80} height={80} layout="intrinsic" />
+                                                }
+                                                <div className='flex justify-center items-center'>
+                                                    <img className='w-[20px] h-[20px]' src=".././static/images/crafting_materials.png" />
+                                                    {crafting.data === undefined ? '' : crafting.data[0].bundleContent[1].cost}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className='flex flex-col items-center'>
+                                        <div className="mt-2">制造器每周轮换</div>
+
+                                        <div className='flex py-5 space-x-5'>
+                                            <div className=''>
+                                                {
+                                                    crafting.data === undefined ? '' : <Image src={crafting.data[1].bundleContent[0].itemType.asset} width={80} height={80} layout="intrinsic" />
+                                                }
+                                                <div className='flex justify-center items-center'>
+                                                    <img className='w-[20px] h-[20px]' src=".././static/images/crafting_materials.png" />
+                                                    {crafting.data === undefined ? '' : crafting.data[1].bundleContent[0].cost}
+                                                </div>
+                                            </div>
+                                            <div className=''>
+                                                {
+                                                    crafting.data === undefined ? '' : <Image src={crafting.data[1].bundleContent[1].itemType.asset} width={80} height={80} layout="intrinsic" />
+                                                }
+                                                <div className='flex justify-center items-center'>
+                                                    <img className='w-[20px] h-[20px]' src=".././static/images/crafting_materials.png" />
+                                                    {crafting.data === undefined ? '' : crafting.data[1].bundleContent[1].cost}
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div className='flex flex-col items-center'>
+                                        <div className="mt-2">赛季轮换枪械</div>
+
+                                        <div className='flex py-5 space-x-5'>
+                                            <div className=''>
+                                                {
+                                                    crafting.data === undefined ? '' : <Image src={crafting.data[2].bundleContent[0].itemType.asset} width={80} height={80} layout="intrinsic" />
+                                                }
+                                                <div className='flex justify-center items-center'>
+                                                    <img className='w-[20px] h-[20px]' src=".././static/images/crafting_materials.png" />
+                                                    {crafting.data === undefined ? '' : crafting.data[2].bundleContent[0].cost}
+                                                </div>
+                                            </div>
+                                            <div className=''>
+                                                {
+                                                    crafting.data === undefined ? '' : <Image src={crafting.data[3].bundleContent[0].itemType.asset} width={80} height={80} layout="intrinsic" />
+                                                }
+                                                <div className='flex justify-center items-center'>
+                                                    <img className='w-[20px] h-[20px]' src=".././static/images/crafting_materials.png" />
+                                                    {crafting.data === undefined ? '' : crafting.data[3].bundleContent[0].cost}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {/* crafting */}
+                        {/* News */}
+                        <div className='lg:w-[50%] w-full lg:pl-2 lg:pr-5 px-5 text-white font-light lg:mt-0'>
+                            <div className='w-full rounded-lg px-2 py-2 lg:mt-0 bg-[#000012] bg-opacity-80'>
+                                <div className=' space-y-4'>
+                                    {news.data?.slice(indexOfFirstPost, indexOfLastPost).map(e =>
+                                        <div key={e.id} className='w-full h-[174.48px] bg-[#3a3a8a] bg-opacity-50'>
+                                            <div className='flex h-full relative'>
+                                                <div className='w-[40%]'>
+                                                    <Link href={e.link}>
+                                                        <img className='object-cover w-full h-full cursor-pointer' src={e.img} />
+                                                    </Link>
+                                                </div>
+                                                <div className='w-[60%] p-2'>
+                                                    <Link href={e.link}>
+                                                        <p className='cursor-pointer hover:underline hover:underline-offset-1'>{e.short_desc}</p>
+                                                    </Link>
+                                                </div>
+                                                <div className='absolute right-0 bottom-0 p-2'>
+                                                    <Link href={e.link}>
+                                                        <p className='cursor-pointer hover:underline opacity-50 hover:opacity-100'>前往EA官网查看</p>
+                                                    </Link>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+                                <Pagination
+                                    postsPerPage={postPerPage}
+                                    totalPost={news.data?.length}
+                                    paginate={paginate}
+                                />
+                            </div>
+                        </div>
+                        {/* News */}
+                    </div>
+                </div>}
         </div>
-
-
     )
 }
