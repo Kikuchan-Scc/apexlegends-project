@@ -45,7 +45,7 @@ export default function Nav() {
                         <ul className='w-full sm:block flex'>
                             {navigation.map((item) => (
                                 <Link key={item.id} href={item.href}>
-                                    <li className='fill-[#4cdddd] sm:bg-transparent bg-[#3a077d] text-[#4cdddd] hover:text-red-600 hover:fill-red-600 w-full h-full py-2 sm:mt-3 sm:hover:border-r-2 sm:hover:border-red-700 flex cursor-pointer justify-center sm:items-center sm:px-5'>
+                                    <li className='fill-[#4cdddd] sm:bg-transparent bg-[#000012] text-[#4cdddd] hover:text-red-600 hover:fill-red-600 w-full h-full py-2 sm:mt-3 sm:hover:border-r-2 sm:hover:border-red-700 flex cursor-pointer justify-center sm:items-center sm:px-5'>
                                         <svg t="1654974949461" className='icon' viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="7963" width="50" height="50"><path d={item.name} p-id="7964"></path></svg>
                                         <div className='w-full h-full ml-[20px] lg:block hidden'>
                                             <p className='font-bold text-xl'>{item.title}</p>

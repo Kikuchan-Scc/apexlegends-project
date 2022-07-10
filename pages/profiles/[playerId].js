@@ -3,6 +3,7 @@ import Nav from '../../components/Nav'
 import { get } from '../../encapsulation/http'
 import ClockLoader from 'react-spinners/ClockLoader'
 import Search from '../../components/Search'
+import Footer from "../../components/Footer"
 import { useRouter } from 'next/router'
 import moment from 'moment'
 
@@ -135,7 +136,7 @@ export default function Profiles() {
                 console.log(err)
                 setLoading(false)
             })
-            
+
         }
     }, [router])
     console.log(player)
@@ -153,7 +154,7 @@ export default function Profiles() {
                         <div className='text-2xl text-slate-800'>Loading...</div>
                     </div>
                     :
-                    <div className=''>
+                    <div className='sm:pb-0 pb-[65px]'>
                         <Search />
                         <div className='py-10 px-4 h-[200px]'>
                             <div className='h-full font-light flex bg-[#363682] bg-opacity-50 rounded-md items-center justify-center'>
@@ -177,7 +178,7 @@ export default function Profiles() {
                             </div>
                         </div>
                         {/* main */}
-                        <div className='lg:flex px-2 font-light'>
+                        <div className='lg:flex px-2 font-light sm:py-5 py-0'>
                             <div className='lg:w-[40%] w-full px-2 space-y-5'>
                                 <div className=' w-full bg-[#363682] bg-opacity-50 rounded-md border-white'>
                                     <div className='grid grid-cols-2 justify-center items-center py-5'>
@@ -226,7 +227,7 @@ export default function Profiles() {
                                     </div>
                                 </div>
                                 {playerData.data?.club == null || playerData.data?.club.name === null ?
-                                    <div className=' bg-slate-800 w-full border-[1px] border-opacity-50 border-white p-5 flex items-center space-x-5 relative'>
+                                    <div className=' bg-[#363682] bg-opacity-50 rounded-md w-full border-[1px] border-white p-5 flex items-center space-x-5 relative'>
                                         <div className=' text-white opacity-30'>
                                             未搜索到相关俱乐部信息
                                         </div>
@@ -251,7 +252,7 @@ export default function Profiles() {
 
                                 }
                             </div>
-                            <div className='lg:w-[60%] w-full lg:px-0 px-2 lg:space-y-0 space-y-5 sm:pb-0 pb-[80px]'>
+                            <div className='lg:w-[60%] w-full lg:px-0 px-2 lg:space-y-0 space-y-5 sm:pb-0 pb-5'>
                                 {/* 选项卡 */}
                                 <div className='font-light w-full h-[50px] lg:mt-0 mt-5 bg-[#363682] bg-opacity-50 rounded-md grid grid-cols-4 justify-center items-center text-center text-white'>
                                     <div className='h-full leading-[50px]'>
@@ -273,7 +274,7 @@ export default function Profiles() {
                                             <div className='w-[70%]'>
                                                 <div className='py-5 text-white'>
                                                     <div className=' text-white font-light'>
-                                                        <div className='lg:text-2xl text-xl py-5'>
+                                                        <div className='lg:text-2xl text-xl '>
                                                             {e.gameMode === 'BATTLE_ROYALE' ? '大逃杀排位赛' : '娱乐模式'}
                                                         </div>
                                                         <div className=' space-y-2 lg:text-base sm:text-[15px] text-[10px] '>
@@ -304,9 +305,10 @@ export default function Profiles() {
                                 </div>
                             </div>
                         </div>
+                        <Footer />
                     </div>
-
                 }
+
             </div>
         </div>
     )
