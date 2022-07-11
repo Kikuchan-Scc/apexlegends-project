@@ -8,7 +8,7 @@ if (process.env.NODE_ENV == 'development') {
     axios.defaults.baseURL = 'http://localhost:3001/api'
 }
 if (process.env.NODE_ENV == 'production') {
-    // axios.defaults.baseURL = 'http://72.44.68.173:3001/api'
+    axios.defaults.baseURL = 'http://72.44.68.173:3001/api'
 }
 
 //请求超时时间为20秒
