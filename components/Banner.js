@@ -5,7 +5,6 @@ import Link from 'next/link'
 import ClockLoader from 'react-spinners/ClockLoader'
 import Router from 'next/router'
 import Pagination from './Pagination'
-import Particle from '../components/Particle';
 
 const platformIcon = [
     {
@@ -52,7 +51,7 @@ export default function Banner({ }) {
     //制造器
     const [crafting, setCrafting] = useState([])
     useEffect(() => {
-        get('/crafting').then((response) => (
+        get('http://72.44.68.173:3001/api/crafting').then((response) => (
             setCrafting(response)
         )).catch((err) => {
             console.log(err)
