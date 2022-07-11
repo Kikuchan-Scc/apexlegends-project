@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Nav from '../../components/Nav'
-import get from '../../encapsulation/http'
+import { get } from '../../encapsulation/http'
 import ClockLoader from 'react-spinners/ClockLoader'
 import Search from '../../components/Search'
 import Footer from "../../components/Footer"

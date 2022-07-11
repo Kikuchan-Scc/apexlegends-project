@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import get from '../encapsulation/http'
+import { get } from '../encapsulation/http'
 import Image from 'next/image'
 import Link from 'next/link'
 import ClockLoader from 'react-spinners/ClockLoader'
 import Router from 'next/router'
 import Pagination from './Pagination'
+
 
 const platformIcon = [
     {
@@ -51,7 +52,7 @@ export default function Banner({ }) {
     //制造器
     const [crafting, setCrafting] = useState([])
     useEffect(() => {
-        get('http://72.44.68.173:3001/api/crafting').then((response) => (
+        get('/crafting').then((response) => (
             setCrafting(response)
         )).catch((err) => {
             console.log(err)
