@@ -5,10 +5,10 @@ import axios from 'axios'
 
 //development开发环境
 if (process.env.NODE_ENV == 'development') {
-    axios.defaults.baseURL = 'http://localhost:3001/api'
+    axios.defaults.baseURL = 'https://www.muanana7mi.com/api'
 }
 if (process.env.NODE_ENV == 'production') {
-    axios.defaults.baseURL = 'http://72.44.68.173:3001/api'
+    axios.defaults.baseURL = 'https://www.muanana7mi.com/api'
 }
 
 //请求超时时间为20秒
