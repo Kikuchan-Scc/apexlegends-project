@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { get, post } from '../api/http'
+import { get, post } from '../encapsulation/http'
 import Pagination from './Pagination'
 import { useQuery } from 'react-query'
 import Image from 'next/image'

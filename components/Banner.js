@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { get } from '../api/http'
+import { get } from '../encapsulation/http'
 import Image from 'next/image'
 import Link from 'next/link'
 import ClockLoader from 'react-spinners/ClockLoader'
