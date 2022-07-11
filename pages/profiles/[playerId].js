@@ -227,7 +227,7 @@ export default function Profiles() {
                                     </div>
                                 </div>
                                 {playerData.data?.club == null || playerData.data?.club.name === null ?
-                                    <div className=' bg-[#363682] bg-opacity-50 rounded-md w-full border-[1px] border-white p-5 flex items-center space-x-5 relative'>
+                                    <div className=' bg-[#363682] bg-opacity-50 rounded-md w-full p-5 flex items-center space-x-5 relative'>
                                         <div className=' text-white opacity-30'>
                                             未搜索到相关俱乐部信息
                                         </div>
