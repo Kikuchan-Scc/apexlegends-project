@@ -110,7 +110,7 @@ export default function Banner({ }) {
                 <div className='flex items-center space-x-10 w-full sm:mt-0 mt-5'>
                     <div className='w-full'>
                         <div className=" rounded-l-md rounded-r-md">
-                            <ul className="flex items-center justify-center">
+                            {/* <ul className="flex items-center justify-center">
                                 {
                                     platformIcon.map((item, index) => (
                                         <li key={item.id} id={item.name} onClick={(e) => listStatus(item, index)} className={isShow === index ? 'px-[50px] py-5 fill-[#fff] rounded-md' : 'px-[50px] py-5 fill-[#fff] opacity-50 rounded-md'}>
@@ -118,7 +118,7 @@ export default function Banner({ }) {
                                         </li>
                                     ))
                                 }
-                            </ul>
+                            </ul> */}
                             <form className='w-full flex px-5'>
                                 <input type="search" onChange={e => setSearchText(e.target.value)} className="outline-none rounded-l-md py-5 pl-5 w-full bg-[#000012] bg-opacity-80 text-white text-opacity-80 sm:h-[100px] h-[60px]" placeholder="查找Origin账户" />
                                 <Link href={'/profiles/' + searchText}>
@@ -129,7 +129,7 @@ export default function Banner({ }) {
                             </form>
                         </div>
                         <div>
-                            <div className='text-white text-xs opacity-80 text-center py-5'>请不要通过Steam名和Switch名查找</div>
+                            <div className='text-white text-xs opacity-80 text-center py-5'>请通过橘子用户名进行搜索（目前暂时只支持PC端搜索）</div>
                         </div>
                     </div>
                 </div>
@@ -201,7 +201,7 @@ export default function Banner({ }) {
                             <div className='lg:pl-5 lg:pr-2 px-5'>
                                 <div className='grid grid-cols-3 gap-4 text-white bg-[#000012] bg-opacity-80 border-opacity-80 rounded-lg'>
                                     <div className='flex flex-col items-center'>
-                                        <div className="mt-2">制造器每日轮换</div>
+                                        <div className="mt-2 sm:text-[15px] text-sm">制造器每日轮换</div>
                                         <div className='flex py-5 space-x-5'>
                                             <div>
                                                 {
@@ -224,7 +224,7 @@ export default function Banner({ }) {
                                         </div>
                                     </div>
                                     <div className='flex flex-col items-center'>
-                                        <div className="mt-2">制造器每周轮换</div>
+                                        <div className="mt-2 sm:text-[15px] text-sm">制造器每周轮换</div>
 
                                         <div className='flex py-5 space-x-5'>
                                             <div className=''>
@@ -249,7 +249,7 @@ export default function Banner({ }) {
 
                                     </div>
                                     <div className='flex flex-col items-center'>
-                                        <div className="mt-2">赛季轮换枪械</div>
+                                        <div className="mt-2 sm:text-[15px] text-sm">赛季轮换枪械</div>
 
                                         <div className='flex py-5 space-x-5'>
                                             <div className=''>

@@ -43,7 +43,7 @@ const Search = () => {
             <div className='flex items-center space-x-10 w-full sm:mt-0 mt-5'>
                 <div className='w-full'>
                     <div className=" rounded-l-md rounded-r-md">
-                        <ul className="flex items-center justify-center">
+                        {/* <ul className="flex items-center justify-center">
                             {
                                 platformIcon.map((item, index) => (
                                     <li key={item.id} id={item.name} onClick={(e) => listStatus(item, index)} className={isShow === index ? 'px-[50px] py-5 fill-white rounded-md' : 'px-[50px] py-5 fill-white opacity-20 rounded-md'}>
@@ -51,7 +51,7 @@ const Search = () => {
                                     </li>
                                 ))
                             }
-                        </ul>
+                        </ul> */}
                         <form className='w-full flex px-5'>
                             <input type="search" onChange={e => setSearchText(e.target.value)} className="outline-none rounded-l-md py-5 pl-5 w-full bg-[#000012] bg-opacity-80 sm:h-[60px] h-[40px]" placeholder="查找Origin账户" />
                             <Link href={'/profiles/' + searchText}>
@@ -62,7 +62,7 @@ const Search = () => {
                         </form>
                     </div>
                     <div>
-                        <div className='text-white text-xs opacity-80 text-center py-5'>请不要通过Steam名和Switch名查找</div>
+                        <div className='text-white text-xs opacity-80 text-center py-5'>请通过橘子用户名进行搜索（目前暂时只支持PC端搜索）</div>
                     </div>
                 </div>
             </div>
