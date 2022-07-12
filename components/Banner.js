@@ -52,27 +52,32 @@ export default function Banner({ }) {
     //制造器
     const [crafting, setCrafting] = useState([])
     useEffect(() => {
-        get('/crafting').then((response) => (
-            setCrafting(response)
-        )).catch((err) => {
-            console.log(err)
-        })
-    },[])
+        setTimeout(() => {
+            get('/crafting').then((response) => (
+                setCrafting(response)
+            )).catch((err) => {
+                console.log(err)
+            })
+        }, 2000)
+    }, [])
     //新闻
     const [currentPage, setCrrentPage] = useState(1)
     const [postPerPage, setPostPerPage] = useState(5)
     const [news, setNews] = useState([])
     const indexOfLastPost = currentPage * postPerPage;
     const indexOfFirstPost = indexOfLastPost - postPerPage;
-    console.log(news.data?.slice(indexOfFirstPost, indexOfLastPost))
+    // console.log(news.data?.slice(indexOfFirstPost, indexOfLastPost))
 
     useEffect(() => {
-        get('/news').then((response) => {
-            setNews(response)
-        }).catch((err) => {
-            console.log(err)
-        })
-    },[])
+        setTimeout(() => {
+            get('/news').then((response) => {
+                setNews(response)
+                console.log(response)
+            }).catch((err) => {
+                console.log(err)
+            })
+        }, 4000)
+    }, [])
 
     // 翻页
     const paginate = (pageNumber) => setCrrentPage(pageNumber)
@@ -86,10 +91,10 @@ export default function Banner({ }) {
     })
 
     return (
-        
+
         <div className="font-light">
             <div className='flex flex-col bg-cover items-center pt-[20px] w-full' >
-            {/* style={{ backgroundImage: "url(.././static/images/olps.png" }} */}
+                {/* style={{ backgroundImage: "url(.././static/images/olps.png" }} */}
                 <div className=''>
                     <div className='mx-auto flex sm:flex-row flex-col items-center'>
                         <div>

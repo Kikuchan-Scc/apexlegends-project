@@ -5,8 +5,8 @@ import Particle from '../components/Particle';
 export default function MyApp({ Component, pageProps }) {
   return (
     <div>
-      <Particle />
-      <Component {...pageProps} />
+        <Particle />
+        <Component {...pageProps} />
     </div>
   )
 }

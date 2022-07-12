@@ -1,8 +1,5 @@
 import axios from 'axios'
 
-
-
-
 //development开发环境
 if (process.env.NODE_ENV == 'development') {
     axios.defaults.baseURL = 'https://www.muanana7mi.com/api'
@@ -15,8 +12,8 @@ if (process.env.NODE_ENV == 'production') {
 // axios.defaults.timeout = 20000;
 
 axios.interceptors.request.use(
-    config=>{
-        config.headers={DeviceType:"H5"}
+    config => {
+        config.headers = { DeviceType: "H5" }
         return config
     }
 )
@@ -35,11 +32,11 @@ export function get(url, params) {
 }
 
 //封装post
-export function post(url,data = {}) {
+export function post(url, data = {}) {
     return new Promise((resolve, rejects) => {
-        axios.post(url,data).then(res => {
+        axios.post(url, data).then(res => {
             resolve(res.data)
-        },err => {
+        }, err => {
             rejects(err)
         })
     })
