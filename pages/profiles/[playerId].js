@@ -122,15 +122,19 @@ export default function Profiles() {
             setPlayer(playerId)
             get(`/player/` + playerId).then((response) => {
                 setPlayerData(response)
-                get(`/match-history/` + response.data?.global.uid).then((response) => {
-                    console.log(response)
-                    setMatch(response)
-                })
-                get(`/origin/` + playerId).then((response) => {
-                    setOrigin(response)
-                }).catch((err) => {
-                    console.log(err)
-                })
+                setTimeout(() => {
+                    get(`/match-history/` + response.data?.global.uid).then((response) => {
+                        console.log(response)
+                        setMatch(response)
+                    })
+                }, 2000)
+                setTimeout(() => {
+                    get(`/origin/` + playerId).then((response) => {
+                        setOrigin(response)
+                    }).catch((err) => {
+                        console.log(err)
+                    })
+                }, 4000)
                 setLoading(false)
             }).catch((err) => {
                 console.log(err)
