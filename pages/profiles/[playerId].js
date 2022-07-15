@@ -6,6 +6,8 @@ import Search from '../../components/Search'
 import Footer from "../../components/Footer"
 import { useRouter } from 'next/router'
 import moment from 'moment'
+import Modal from '../../components/Modal'
+import Link from 'next/link'
 
 //moment.js中文配置
 moment.locale('zh-cn', {
@@ -143,13 +145,16 @@ export default function Profiles() {
 
         }
     }, [router])
-    console.log(player)
-    console.log(match)
-    console.log(origin)
+    // console.log(player)
+    // console.log(match)
+    // console.log(origin)
+
+    const [openModal, setOpenModal] = useState(false)
 
     return (
         <div>
             <Nav />
+            {openModal && <Modal closeModal={setOpenModal} club={playerData} />}
             <div className='lg:ml-[270px] h-[100vh] sm:ml-[90px] ml-0'>
                 {/* {isLoading && router.asPath !== router.route ? <IsLoad /> : <div></div>} */}
                 {loading ?
@@ -249,9 +254,12 @@ export default function Profiles() {
                                             <div className='text-lg'>[{playerData.data?.club.tag}]</div>
                                             <div className=' text-[20px] opacity-50'>{playerData.data?.club.name}</div>
                                         </div>
-                                        <div className='text-white opacity-50 absolute top-2 right-5'>
-                                            详细信息
-                                        </div>
+                                        <button className='text-white opacity-50 absolute top-2 right-5' onClick={() => {setOpenModal(true)}}>
+                                            {/* <Link href={'/profiles/' + 'club/' + playerData.data?.club.tag}> */}
+                                                更多信息
+                                            {/* </Link> */}
+                                        </button>
+                                        
                                     </div>
 
                                 }
