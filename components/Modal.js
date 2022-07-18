@@ -1,6 +1,11 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import Link from 'next/link'
 
 const Modal = ({ closeModal, club }) => {
+    console.log(club)
+    //搜索跳转
+    const [searchText, setSearchText] = useState('')
+    //loading状态
     return (
         <div className='w-full h-[100vh] font-light bg-black bg-opacity-80 fixed z-[9999] flex justify-center items-center'>
             <div className='w-[95vw] h-[95vh] bg-[#1b1b53] overflow-hidden px-2 py-2'>
@@ -34,10 +39,23 @@ const Modal = ({ closeModal, club }) => {
                         <div className='mt-2 h-[95%] overflow-y-scroll'>
                             <div className=''>
                                 <div className='w-[100%]'>
-                                    <div className='grid grid-cols-2'>
-                                        {club.data.club.members.map((e) => (
-                                            <div key={e.id} className='h-[60px] flex items-center'>{e.name}</div>
-                                        ))
+                                    <div className='grid grid-cols-1 px-2'>
+                                        {
+                                            club.data.club.members.map((e) => (
+                                                <div class="table w-full ...">
+                                                    <div class="table-header-group">
+                                                        <div class="table-row h-[60px] text-white">
+                                                            <div class="table-cell text-left leading-[60px] w-[400px]">[{e.role === 'Creator' ? '创建者' : e.role === 'Admin' ? '管理员' : '成员'}]  {e.name}</div>
+                                                            <div class="table-cell text-left leading-[60px] w-[400px]">{e.platform === 'PC' ? <div className='flex items-center space-x-4'><svg t="1655445801245" className="icon" viewBox="0 0 1024 1024" version="1.1" fill='#02a8e4' xmlns="http://www.w3.org/2000/svg" p-id="1562" width="20" height="20"><path d="M430.59456 494.1504 430.59456 81.93536 7.04 141.18528 7.04 494.1504Z" p-id="1563"></path><path d="M465.88672 494.1504 1016.32 494.1504 1016.32 0 465.88672 77.00864Z" p-id="1564"></path><path d="M430.59456 529.44256 7.04 529.44256 7.04 882.41152 430.59456 941.664Z" p-id="1565"></path><path d="M465.88672 529.44256 465.88672 946.59072 1016.32 1023.59168 1016.32 529.44256Z" p-id="1566"></path></svg><div>{e.platform}</div></div> : ''}</div>
+                                                            <div class="table-cell text-left leading-[60px] w-[400px] text-white text-opacity-50">
+                                                                <button>
+                                                                    <Link href={'/uid/' + e.uid} className='hover:cursor-pointer'>查看玩家</Link>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            ))
                                         }
                                     </div>
                                 </div>

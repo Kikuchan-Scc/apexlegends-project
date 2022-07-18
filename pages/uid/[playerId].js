@@ -122,7 +122,7 @@ export default function Profiles() {
         setLoading(true)
         if (router.asPath !== router.route && playerData !== undefined) {
             setPlayer(playerId)
-            get(`/player/` + playerId).then((response) => {
+            get(`/uid/` + playerId).then((response) => {
                 setPlayerData(response)
                 setTimeout(() => {
                     get(`/match-history/` + response.data?.global.uid).then((response) => {
@@ -145,7 +145,7 @@ export default function Profiles() {
 
         }
     }, [router])
-    console.log(player)
+    console.log(playerId)
     // console.log(match)
     // console.log(origin)
 

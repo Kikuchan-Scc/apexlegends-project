@@ -3,7 +3,7 @@ import axios from 'axios'
 //development开发环境
 if (process.env.NODE_ENV == 'development') {
     // axios.defaults.baseURL = 'http://localhost:3001/api'
-    axios.defaults.baseURL = 'https://www.muanana7mi.com/api'
+    axios.defaults.baseURL = 'http://localhost:3001/api'
 }
 if (process.env.NODE_ENV == 'production') {
     axios.defaults.baseURL = 'https://www.muanana7mi.com/api'
