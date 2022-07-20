@@ -53,7 +53,7 @@ const Search = () => {
                             }
                         </ul> */}
                         <form className='w-full flex px-5'>
-                            <input type="search" onChange={e => setSearchText(e.target.value)} className="outline-none rounded-l-md py-5 pl-5 w-full bg-[#000012] bg-opacity-80 sm:h-[60px] h-[40px]" placeholder="查找Origin账户" />
+                            <input type="search" onChange={e => setSearchText(e.target.value)} className="outline-none rounded-l-md py-5 pl-5 w-full bg-[#000012] text-white bg-opacity-80 sm:h-[60px] h-[40px]" placeholder="查找Origin账户" />
                             <Link href={'/profiles/' + searchText}>
                                 <button onClick={handlePlayerSearch} className='flex justify-center items-center rounded-r-md sm:w-[120px] w-[80px] bg-[#3a3a8a] bg-opacity-80 text-white'>
                                     <svg t="1654981222879" className="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="11183" width="35" height="35"><path d="M469.333333 768c-166.4 0-298.666667-132.266667-298.666666-298.666667s132.266667-298.666667 298.666666-298.666666 298.666667 132.266667 298.666667 298.666666-132.266667 298.666667-298.666667 298.666667z m0-85.333333c119.466667 0 213.333333-93.866667 213.333334-213.333334s-93.866667-213.333333-213.333334-213.333333-213.333333 93.866667-213.333333 213.333333 93.866667 213.333333 213.333333 213.333334z m251.733334 0l119.466666 119.466666-59.733333 59.733334-119.466667-119.466667 59.733334-59.733333z" fill="#ffffff" p-id="11184"></path></svg>

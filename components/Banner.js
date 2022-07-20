@@ -5,6 +5,104 @@ import Link from 'next/link'
 import ClockLoader from 'react-spinners/ClockLoader'
 import Router from 'next/router'
 import Pagination from './Pagination'
+import moment from 'moment'
+
+//moment.js中文配置
+moment.locale('zh-cn', {
+    months: '一月_二月_三月_四月_五月_六月_七月_八月_九月_十月_十一月_十二月'.split('_'),
+    monthsShort: '1月_2月_3月_4月_5月_6月_7月_8月_9月_10月_11月_12月'.split('_'),
+    weekdays: '星期日_星期一_星期二_星期三_星期四_星期五_星期六'.split('_'),
+    weekdaysShort: '周日_周一_周二_周三_周四_周五_周六'.split('_'),
+    weekdaysMin: '日_一_二_三_四_五_六'.split('_'),
+    longDateFormat: {
+        LT: 'HH:mm',
+        LTS: 'HH:mm:ss',
+        L: 'YYYY-MM-DD',
+        LL: 'YYYY年MM月DD日',
+        LLL: 'YYYY年MM月DD日Ah点mm分',
+        LLLL: 'YYYY年MM月DD日ddddAh点mm分',
+        l: 'YYYY-M-D',
+        ll: 'YYYY年M月D日',
+        lll: 'YYYY年M月D日 HH:mm',
+        llll: 'YYYY年M月D日dddd HH:mm'
+    },
+    meridiemParse: /凌晨|早上|上午|中午|下午|晚上/,
+    meridiemHour: function (hour, meridiem) {
+        if (hour === 12) {
+            hour = 0;
+        }
+        if (meridiem === '凌晨' || meridiem === '早上' ||
+            meridiem === '上午') {
+            return hour;
+        } else if (meridiem === '下午' || meridiem === '晚上') {
+            return hour + 12;
+        } else {
+            // '中午'
+            return hour >= 11 ? hour : hour + 12;
+        }
+    },
+    meridiem: function (hour, minute, isLower) {
+        const hm = hour * 100 + minute;
+        if (hm < 600) {
+            return '凌晨';
+        } else if (hm < 900) {
+            return '早上';
+        } else if (hm < 1130) {
+            return '上午';
+        } else if (hm < 1230) {
+            return '中午';
+        } else if (hm < 1800) {
+            return '下午';
+        } else {
+            return '晚上';
+        }
+    },
+    calendar: {
+        sameDay: '[今天]LT',
+        nextDay: '[明天]LT',
+        nextWeek: '[下]ddddLT',
+        lastDay: '[昨天]LT',
+        lastWeek: '[上]ddddLT',
+        sameElse: 'L'
+    },
+    dayOfMonthOrdinalParse: /\d{1,2}(日|月|周)/,
+    ordinal: function (number, period) {
+        switch (period) {
+            case 'd':
+            case 'D':
+            case 'DDD':
+                return number + '日';
+            case 'M':
+                return number + '月';
+            case 'w':
+            case 'W':
+                return number + '周';
+            default:
+                return number;
+        }
+    },
+    relativeTime: {
+        future: '%s内',
+        past: '%s前',
+        s: '几秒',
+        ss: '%d秒',
+        m: '1分钟',
+        mm: '%d分钟',
+        h: '1小时',
+        hh: '%d小时',
+        d: '1天',
+        dd: '%d天',
+        M: '1个月',
+        MM: '%d个月',
+        y: '1年',
+        yy: '%d年'
+    },
+    week: {
+        // GB/T 7408-1994《数据元和交换格式·信息交换·日期和时间表示法》与ISO 8601:1988等效
+        dow: 1, // Monday is the first day of the week.
+        doy: 4  // The week that contains Jan 4th is the first week of the year.
+    }
+})
 
 
 const platformIcon = [
@@ -23,6 +121,7 @@ const platformIcon = [
 ]
 
 export default function Banner({ }) {
+    moment.locale('zh-cn')
 
     const [isShow, setIsShow] = useState(0);
     const listStatus = (item, index) => {
@@ -153,7 +252,7 @@ export default function Banner({ }) {
                                     </div>
                                     <div className='text-white py-5'>
                                         <p className='text-center'>当前匹配竞技场地图为：{mapRotate.data?.arenas.current.map}</p>
-                                        <p className='text-center text-white'>距离结束还有：{mapRotate.data?.arenas.current.remainingTimer}</p>
+                                        <p className='text-center text-white'>距离结束还有：{moment((mapRotate.data?.arenas.current.end * 1000)).fromNow()}</p>
                                         <div className='text-xl text-white'>下一张竞技场地图为：{mapRotate.data?.arenas.next.map}</div>
                                     </div>
                                 </div>
@@ -164,7 +263,7 @@ export default function Banner({ }) {
                                     }
                                     <div className='text-white py-5'>
                                         <p className='text-center'>当前竞技场排位地图为：{mapRotate.data?.arenasRanked.current.map}</p>
-                                        <p className='text-center text-white'>距离结束还有：{mapRotate.data?.arenasRanked.current.remainingTimer}</p>
+                                        <p className='text-center text-white'>距离结束还有：{moment((mapRotate.data?.arenasRanked.current.end * 1000)).fromNow()}</p>
                                         <div className='text-xl text-white'>下一张竞技场地图为：{mapRotate.data?.arenasRanked.next.map}</div>
                                     </div>
                                 </div>
@@ -176,20 +275,32 @@ export default function Banner({ }) {
 
                                     <div className='text-white py-5'>
                                         <p className='text-white'>当前匹配大逃杀地图为：{mapRotate.data?.battle_royale.current.map}</p>
-                                        <p className='text-center text-white'>距离结束还有：{mapRotate.data?.battle_royale.current.remainingTimer}</p>
+                                        <p className='text-center text-white'>距离结束还有：{moment((mapRotate.data?.battle_royale.current.end * 1000)).fromNow()}</p>
                                         <div className='text-xl text-white'>下一张大逃杀地图为：{mapRotate.data?.battle_royale.next.map}</div>
                                     </div>
                                 </div>
 
                                 <div className='rounded-md bg-[#000012] bg-opacity-80'>
                                     {
-                                        mapRotate.data === undefined ? '' : <Image className='object-cover' src={mapRotate?.data.battle_royale.next.asset} width={3000} height={2000} layout="intrinsic" />
+                                        mapRotate.data === undefined ? '' : <Image className='object-cover' src={mapRotate?.data.ranked.current.asset} width={3000} height={2000} layout="intrinsic" />
                                     }
-
                                     <div className='text-white py-5'>
                                         <p className='text-white'>当前排位大逃杀地图为：{mapRotate.data?.ranked.current.map}</p>
-                                        <p className='text-center text-white'>距离结束还有：{mapRotate.data?.ranked.current.remainingTimer}</p>
+                                        <p className='text-center text-white'>距离结束还有：{moment((mapRotate.data?.ranked.current.end * 1000)).fromNow()}</p>
                                         <div className='text-xl text-white'>下一赛季排位地图为：{mapRotate.data?.ranked.next.map}</div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div className='px-5 pt-5'>
+                                <div className='rounded-md bg-[#000012] bg-opacity-80 w-full'>
+                                    {
+                                        mapRotate.data === undefined ? '' : <img className='object-cover sm:w-full sm:h-[300px] h-[314px]' src={mapRotate?.data.ltm.current.asset} />
+                                    }
+                                    <div className='text-white py-5'>
+                                        <p className='text-white'>当前活动模式地图为：{mapRotate.data?.ltm.current.map}</p>
+                                        <p className='text-center text-white'>距离结束还有：{moment((mapRotate.data?.ltm.current.end * 1000)).fromNow()}</p>
+                                        <div className='text-xl text-white'>下一赛活动地图为：{mapRotate.data?.ltm.next.map}</div>
                                     </div>
                                 </div>
                             </div>
@@ -201,73 +312,73 @@ export default function Banner({ }) {
                             <div className='lg:pl-5 lg:pr-2 px-5'>
                                 <div className='grid grid-cols-3 gap-4 text-white bg-[#000012] bg-opacity-80 border-opacity-80 rounded-lg'>
                                     <div className='flex flex-col items-center'>
-                                        <div className="mt-2 sm:text-[15px] text-sm">制造器每日轮换</div>
+                                        <div className="mt-2 sm:text-[15px] text-sm">每日轮换</div>
                                         <div className='flex py-5 space-x-5'>
                                             <div>
                                                 {
                                                     crafting.data === undefined ? '' : <Image src={crafting.data[0].bundleContent[0].itemType.asset} width={80} height={80} layout="intrinsic" />
                                                 }
-                                                <div className='flex justify-center items-center'>
+                                                <div className='flex justify-center items-center space-x-1'>
                                                     <img className='w-[20px] h-[20px]' src=".././static/images/crafting_materials.png" />
-                                                    {crafting.data === undefined ? '' : crafting.data[0].bundleContent[0].cost}
+                                                    <div>{crafting.data === undefined ? '' : crafting.data[0].bundleContent[0].cost}</div>
                                                 </div>
                                             </div>
                                             <div className=''>
                                                 {
                                                     crafting.data === undefined ? '' : <Image src={crafting.data[0].bundleContent[1].itemType.asset} width={80} height={80} layout="intrinsic" />
                                                 }
-                                                <div className='flex justify-center items-center'>
+                                                <div className='flex justify-center items-center space-x-1'>
                                                     <img className='w-[20px] h-[20px]' src=".././static/images/crafting_materials.png" />
-                                                    {crafting.data === undefined ? '' : crafting.data[0].bundleContent[1].cost}
+                                                    <div>{crafting.data === undefined ? '' : crafting.data[0].bundleContent[1].cost}</div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div className='flex flex-col items-center'>
-                                        <div className="mt-2 sm:text-[15px] text-sm">制造器每周轮换</div>
+                                        <div className="mt-2 sm:text-[15px] text-sm">每周轮换</div>
 
                                         <div className='flex py-5 space-x-5'>
                                             <div className=''>
                                                 {
                                                     crafting.data === undefined ? '' : <Image src={crafting.data[1].bundleContent[0].itemType.asset} width={80} height={80} layout="intrinsic" />
                                                 }
-                                                <div className='flex justify-center items-center'>
+                                                <div className='flex justify-center items-center space-x-1'>
                                                     <img className='w-[20px] h-[20px]' src=".././static/images/crafting_materials.png" />
-                                                    {crafting.data === undefined ? '' : crafting.data[1].bundleContent[0].cost}
+                                                    <div>{crafting.data === undefined ? '' : crafting.data[1].bundleContent[0].cost}</div>
                                                 </div>
                                             </div>
                                             <div className=''>
                                                 {
                                                     crafting.data === undefined ? '' : <Image src={crafting.data[1].bundleContent[1].itemType.asset} width={80} height={80} layout="intrinsic" />
                                                 }
-                                                <div className='flex justify-center items-center'>
+                                                <div className='flex justify-center items-center space-x-1'>
                                                     <img className='w-[20px] h-[20px]' src=".././static/images/crafting_materials.png" />
-                                                    {crafting.data === undefined ? '' : crafting.data[1].bundleContent[1].cost}
+                                                    <div>{crafting.data === undefined ? '' : crafting.data[1].bundleContent[1].cost}</div>
                                                 </div>
                                             </div>
                                         </div>
 
                                     </div>
                                     <div className='flex flex-col items-center'>
-                                        <div className="mt-2 sm:text-[15px] text-sm">赛季轮换枪械</div>
+                                        <div className="mt-2 sm:text-[15px] text-sm">赛季轮换</div>
 
                                         <div className='flex py-5 space-x-5'>
                                             <div className=''>
                                                 {
                                                     crafting.data === undefined ? '' : <Image src={crafting.data[2].bundleContent[0].itemType.asset} width={80} height={80} layout="intrinsic" />
                                                 }
-                                                <div className='flex justify-center items-center'>
+                                                <div className='flex justify-center items-center space-x-1'>
                                                     <img className='w-[20px] h-[20px]' src=".././static/images/crafting_materials.png" />
-                                                    {crafting.data === undefined ? '' : crafting.data[2].bundleContent[0].cost}
+                                                    <div>{crafting.data === undefined ? '' : crafting.data[2].bundleContent[0].cost}</div>
                                                 </div>
                                             </div>
                                             <div className=''>
                                                 {
                                                     crafting.data === undefined ? '' : <Image src={crafting.data[3].bundleContent[0].itemType.asset} width={80} height={80} layout="intrinsic" />
                                                 }
-                                                <div className='flex justify-center items-center'>
+                                                <div className='flex justify-center items-center space-x-1'>
                                                     <img className='w-[20px] h-[20px]' src=".././static/images/crafting_materials.png" />
-                                                    {crafting.data === undefined ? '' : crafting.data[3].bundleContent[0].cost}
+                                                    <div>{crafting.data === undefined ? '' : crafting.data[3].bundleContent[0].cost}</div>
                                                 </div>
                                             </div>
                                         </div>

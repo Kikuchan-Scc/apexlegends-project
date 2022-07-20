@@ -5,11 +5,10 @@ import Particle from '../components/Particle';
 
 export default function MyApp({ Component, pageProps }) {
   return (
-    <div>
+    <div className=''>
       <Nav />
       <Particle />
       < Component {...pageProps} />
-
     </div>
   )
 }

@@ -4,7 +4,7 @@ import React from 'react'
 
 export default function Home() {
   return (
-    <div>
+    <div className="">
       <div className="lg:ml-[270px] sm:ml-[90px] ml-0 sm:pb-0 pb-[65px]">
         <Banner />
         <Footer />
