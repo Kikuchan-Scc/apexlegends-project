@@ -166,7 +166,7 @@ export default function Profiles() {
                     <div className='sm:pb-0 pb-[65px]'>
                         <Search />
                         <div className='py-10 px-4 h-[200px]'>
-                            <div className='h-full font-light flex bg-[#363682] bg-opacity-50 rounded-md items-center justify-center'>
+                            <div className='h-full font-light flex bg-[#363682] bg-opacity-80 rounded-md items-center justify-center'>
                                 <div className='flex justify-center items-center space-x-5 text-white'>
                                     {origin.data?.avatar === "" || origin.data?.avatar === undefined ?
                                         <svg t="1657307222035" className="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2259" width="80" height="80"><path d="M513.536 628.6336c101.6832 0 280.8832 38.7072 310.8864 193.7408 77.5168-77.5168 124.928-185.9584 124.928-305.0496 0-241.152-194.6624-435.8144-435.8144-435.8144S77.7216 277.0944 77.7216 517.2224c0 119.0912 47.4112 227.6352 124.928 306.0736 30.0032-154.9312 209.2032-194.6624 310.8864-194.6624z m0-439.7056c112.3328 0 204.3904 91.0336 204.3904 204.3904 0 112.3328-91.0336 204.3904-204.3904 204.3904a203.776 203.776 0 0 1-204.3904-204.3904c0.1024-112.4352 92.0576-204.3904 204.3904-204.3904z m0 0" p-id="2260"></path><path d="M515.4816 1006.8992c-65.8432 0-129.8432-12.9024-189.952-38.4-58.1632-24.576-110.2848-59.8016-155.136-104.5504A485.56032 485.56032 0 0 1 65.8432 708.8128c-25.6-60.2112-38.5024-124.1088-38.5024-189.952 0-65.8432 12.9024-129.8432 38.4-189.952 24.576-58.1632 59.8016-110.2848 104.5504-155.136 44.8512-44.8512 96.9728-79.9744 155.136-104.5504C385.6384 43.6224 449.536 30.72 515.4816 30.72c65.8432 0 129.8432 12.9024 189.952 38.4 58.1632 24.576 110.2848 59.8016 155.136 104.5504 44.8512 44.8512 79.9744 96.9728 104.5504 155.136C990.6176 389.0176 1003.52 452.9152 1003.52 518.8608c0 65.8432-12.9024 129.8432-38.4 189.952-24.576 58.1632-59.8016 110.2848-104.5504 155.136a485.56032 485.56032 0 0 1-155.136 104.5504 484.39296 484.39296 0 0 1-189.952 38.4z m0-936.8576c-60.6208 0-119.3984 11.8784-174.6944 35.2256a447.76448 447.76448 0 0 0-142.6432 96.1536A444.42624 444.42624 0 0 0 101.9904 344.064a446.70976 446.70976 0 0 0-35.2256 174.6944c0 60.6208 11.8784 119.3984 35.2256 174.6944 22.6304 53.4528 54.9888 101.4784 96.1536 142.6432 41.1648 41.2672 89.1904 73.6256 142.6432 96.1536 55.296 23.3472 114.0736 35.2256 174.6944 35.2256 60.6208 0 119.3984-11.8784 174.6944-35.2256 53.4528-22.6304 101.4784-54.9888 142.6432-96.1536 41.2672-41.1648 73.6256-89.1904 96.1536-142.6432 23.3472-55.296 35.2256-114.0736 35.2256-174.6944 0-60.6208-11.8784-119.3984-35.2256-174.6944a447.76448 447.76448 0 0 0-96.1536-142.6432 444.42624 444.42624 0 0 0-142.6432-96.1536 447.44704 447.44704 0 0 0-174.6944-35.2256z m0 0" p-id="2261"></path></svg>
@@ -189,7 +189,7 @@ export default function Profiles() {
                         {/* main */}
                         <div className='lg:flex px-2 font-light sm:py-5 py-0'>
                             <div className='lg:w-[40%] w-full px-2 space-y-5'>
-                                <div className=' w-full bg-[#363682] bg-opacity-50 rounded-md border-white'>
+                                <div className=' w-full bg-[#363682] bg-opacity-80 rounded-md border-white'>
                                     <div className='grid grid-cols-2 justify-center items-center py-5'>
                                         <div className='text-white'>
                                             <div className='text-center'>大逃杀</div>
@@ -213,7 +213,7 @@ export default function Profiles() {
                                         </div>
                                     </div>
                                 </div>
-                                <div className=' w-full bg-[#363682] bg-opacity-50 rounded-md'>
+                                <div className=' w-full bg-[#363682] bg-opacity-80 rounded-md'>
                                     <div className='py-5 px-5 text-white'>
                                         {playerData.data?.realtime.isOnline === 0 ?
                                             <div className='flex items-center'>
@@ -236,13 +236,13 @@ export default function Profiles() {
                                     </div>
                                 </div>
                                 {playerData.data?.club == null || playerData.data?.club.name === null ?
-                                    <div className=' bg-[#363682] bg-opacity-50 rounded-md w-full p-5 flex items-center space-x-5 relative'>
+                                    <div className=' bg-[#363682] bg-opacity-80 rounded-md w-full p-5 flex items-center space-x-5 relative'>
                                         <div className=' text-white opacity-30'>
                                             未搜索到相关俱乐部信息
                                         </div>
                                     </div>
                                     :
-                                    <div className=' bg-[#363682] bg-opacity-50 rounded-md w-full p-5 flex items-center space-x-5 relative'>
+                                    <div className=' bg-[#363682] bg-opacity-80 rounded-md w-full p-5 flex items-center space-x-5 relative'>
                                         <div>
                                             <img className='w-[100px]' src={playerData.data?.club.logo} />
                                         </div>
@@ -252,7 +252,7 @@ export default function Profiles() {
                                         <div className=' text-white'>
                                             <div className='text-lg py-1'>俱乐部</div>
                                             <div className='text-lg'>[{playerData.data?.club.tag}]</div>
-                                            <div className=' text-[20px] opacity-50'>{playerData.data?.club.name}</div>
+                                            <div className=' text-[20px] opacity-80'>{playerData.data?.club.name}</div>
                                         </div>
                                         <button className='text-white opacity-50 absolute top-2 right-5' onClick={() => {setOpenModal(true)}}>
                                             {/* <Link href={'/profiles/' + 'club/' + playerData.data?.club.tag}> */}
@@ -266,7 +266,7 @@ export default function Profiles() {
                             </div>
                             <div className='lg:w-[60%] w-full lg:px-0 px-2 lg:space-y-0 space-y-5 sm:pb-0 pb-5'>
                                 {/* 选项卡 */}
-                                <div className='font-light w-full h-[50px] lg:mt-0 mt-5 bg-[#363682] bg-opacity-50 rounded-md grid grid-cols-4 justify-center items-center text-center text-white'>
+                                <div className='font-light w-full h-[50px] lg:mt-0 mt-5 bg-[#363682] bg-opacity-80 rounded-md grid grid-cols-4 justify-center items-center text-center text-white'>
                                     <div className='h-full leading-[50px]'>
                                         <p>比赛历史</p>
                                     </div>
@@ -275,7 +275,7 @@ export default function Profiles() {
 
                                 </div>
                                 {/* 卡片 */}
-                                <div className=' bg-[#363682] bg-opacity-50 rounded-md overflow-hidden '>
+                                <div className=' bg-[#363682] bg-opacity-80 rounded-md overflow-hidden '>
                                     {match.data?.map(e =>
                                         <div key={e.id} className='flex my-4 mx-5 rounded-2xl'>
                                             <div className='w-[30%]'>
