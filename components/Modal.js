@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import Link from 'next/link'
 
 const Modal = ({ closeModal, club }) => {
@@ -41,7 +41,7 @@ const Modal = ({ closeModal, club }) => {
                                     <div className='grid grid-cols-1 px-2'>
                                         {
                                             club.data.club.members.map((e) => (
-                                                <div className="w-full ">
+                                                <div key={e.id} className="w-full ">
                                                     <div className="w-full lg:px-0 px-5">
                                                         <div className=" w-full text-white flex lg:justify-center justify-between">
                                                             <div className="flex text-left lg:w-1/3 w-1/2 leading-[60px] truncate">
