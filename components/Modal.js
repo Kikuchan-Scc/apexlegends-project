@@ -41,16 +41,16 @@ const Modal = ({ closeModal, club }) => {
                                     <div className='grid grid-cols-1 px-2'>
                                         {
                                             club.data.club.members.map((e) => (
-                                                <div class="w-full ">
-                                                    <div class="w-full lg:px-0 px-5">
-                                                        <div class=" w-full text-white flex lg:justify-center justify-between">
-                                                            <div class="flex text-left lg:w-1/3 w-1/2 leading-[60px] truncate">
+                                                <div className="w-full ">
+                                                    <div className="w-full lg:px-0 px-5">
+                                                        <div className=" w-full text-white flex lg:justify-center justify-between">
+                                                            <div className="flex text-left lg:w-1/3 w-1/2 leading-[60px] truncate">
                                                                 <div>{e.platform === 'PC' ? <svg t="1655445801245" className="icon mt-[21px] mr-2 lg:hidden block w-[20px] h-[20px]" viewBox="0 0 1024 1024" version="1.1" fill='#02a8e4' xmlns="http://www.w3.org/2000/svg" p-id="1562" width="20" height="20"><path d="M430.59456 494.1504 430.59456 81.93536 7.04 141.18528 7.04 494.1504Z" p-id="1563"></path><path d="M465.88672 494.1504 1016.32 494.1504 1016.32 0 465.88672 77.00864Z" p-id="1564"></path><path d="M430.59456 529.44256 7.04 529.44256 7.04 882.41152 430.59456 941.664Z" p-id="1565"></path><path d="M465.88672 529.44256 465.88672 946.59072 1016.32 1023.59168 1016.32 529.44256Z" p-id="1566"></path></svg> : ''}</div>
                                                                 <div>[{e.role === 'Creator' ? '创建者' : e.role === 'Admin' ? '管理员' : '成员'}]</div>
                                                                 <div>{e.name}</div>
                                                             </div>
-                                                            <div class="lg:flex text-left lg:w-1/3 w-1/2 leading-[60px] hidden">{e.platform === 'PC' ? <div className='items-center flex space-x-4'><svg t="1655445801245" className="icon" viewBox="0 0 1024 1024" version="1.1" fill='#02a8e4' xmlns="http://www.w3.org/2000/svg" p-id="1562" width="20" height="20"><path d="M430.59456 494.1504 430.59456 81.93536 7.04 141.18528 7.04 494.1504Z" p-id="1563"></path><path d="M465.88672 494.1504 1016.32 494.1504 1016.32 0 465.88672 77.00864Z" p-id="1564"></path><path d="M430.59456 529.44256 7.04 529.44256 7.04 882.41152 430.59456 941.664Z" p-id="1565"></path><path d="M465.88672 529.44256 465.88672 946.59072 1016.32 1023.59168 1016.32 529.44256Z" p-id="1566"></path></svg><div>{e.platform}</div></div> : ''}</div>
-                                                            <div class="flex lg:text-left text-right lg:w-1/3 leading-[60px]">
+                                                            <div className="lg:flex text-left lg:w-1/3 w-1/2 leading-[60px] hidden">{e.platform === 'PC' ? <div className='items-center flex space-x-4'><svg t="1655445801245" className="icon" viewBox="0 0 1024 1024" version="1.1" fill='#02a8e4' xmlns="http://www.w3.org/2000/svg" p-id="1562" width="20" height="20"><path d="M430.59456 494.1504 430.59456 81.93536 7.04 141.18528 7.04 494.1504Z" p-id="1563"></path><path d="M465.88672 494.1504 1016.32 494.1504 1016.32 0 465.88672 77.00864Z" p-id="1564"></path><path d="M430.59456 529.44256 7.04 529.44256 7.04 882.41152 430.59456 941.664Z" p-id="1565"></path><path d="M465.88672 529.44256 465.88672 946.59072 1016.32 1023.59168 1016.32 529.44256Z" p-id="1566"></path></svg><div>{e.platform}</div></div> : ''}</div>
+                                                            <div className="flex lg:text-left text-right lg:w-1/3 leading-[60px]">
                                                                 <button className='text-white text-opacity-50 hover:text-opacity-100 flex'>
                                                                     <Link className=' text-right' href={'/uid/' + e.uid}>查看玩家</Link>
                                                                 </button>
